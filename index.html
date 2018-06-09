@@ -15,12 +15,6 @@
 	  <link rel="apple-touch-icon" href="icons/pwa-icon-256x256.png">
 	  <meta name="msapplication-TileImage" content="icons/pwa-icon-256x256.png">
 	  <meta name="msapplication-TileColor" content="#2e7fa1">
-		<script>
-			if ('serviceWorker' in navigator) {
-		    navigator.serviceWorker.register('/service-worker.js');
-				console.log('Service Worker Registered');
-			}
-    </script>
 
 	</head>
 	<body>
@@ -29,5 +23,6 @@
 
 Hybrid apps
 Hybrid apps mimic the native mobile UX, and need an App store download. As such they consume storage. The combination of markup, styling sheets, and scripts enable custom interactive page elements without the use of closed systems such as Flash. Partially running in a mobile browser, hybrids did not have a URL, supported a rich user interface and access to system capabilities. Newly released CSS3 and JavaScript frameworks allowed new design patterns such as the box model followed by grids and flex, accompanied by translations, transformations, animations.</div>
+	<script src="scripts/app.js" async></script>
 	</body>
 </html>
