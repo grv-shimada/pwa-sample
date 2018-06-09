@@ -2,8 +2,8 @@
 var dataCacheName = 'pwaTestData-v1';
 var cacheName = 'pwaTest-final-1';
 var filesToCache = [
-  '/',
-  '/index.html',
+  './',
+  './index.html',
 ];
 
 self.addEventListener('install', function(e) {
