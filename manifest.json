@@ -2,12 +2,12 @@
   "name": "My PWA Sample App",
   "short_name": "MPSA",
   "icons": [{
-      "src": "images/icons/pwa-icon-144x144.png",
+      "src": "icons/pwa-icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png"
     }],
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#3E4EB8",
-  "theme_color": "#2F3BA2"
+  "background_color": "#b83eb3",
+  "theme_color": "#2e7fa1"
 }
