@@ -34,6 +34,9 @@
 				<h3>PWA Service Worker Sample</h3>
 			</div>
 
+			<div id="geo_location">
+			</div>
+
 			<div id="food">
 			</div>
 
@@ -48,7 +51,7 @@
 
 	<script>
 	if (!navigator.geolocation) {
-		alert("この端末では位置情報が取得できません");
+		alert('Location information can not be acquired on this device.');
   } else {
 		searchPosition();
 	}
@@ -61,6 +64,7 @@
         function(position) {
 					var latitude = position.coords.latitude;
 					var longitude = position.coords.longitude;
+					$('#geo_location').html('Latitude : ' + latitude + '<br>' 'Longitude : ' + longitude);
 					var radius = 600;
 					searchNear(latitude, longitude, radius);
         },
@@ -68,16 +72,16 @@
         function(error) {
           switch(error.code) {
             case 1:
-              alert("位置情報の利用が許可されていません");
+              alert('Location permission denied.');
               break;
             case 2:
-              alert("現在位置が取得できませんでした");
+              alert('The current position could not be acquired.');
               break;
             case 3:
-              alert("タイムアウトになりました");
+              alert('Timeout');
               break;
             default:
-              alert("その他のエラー(エラーコード:"+error.code+")");
+              alert('Other error error code :' + error.code);
               break;
           }
         }
@@ -96,7 +100,7 @@
 			    } else if (request.status != 200) {
 			      // on failued
 						console.log('failed');
-						$('#error').html('request failed' + '\n' + 'status code : ' + request.status);
+						$('#error').html('request failed' + '<br>' + 'status code : ' + request.status);
 			    } else {
 						// on success
 			      var json = request.responseText;
