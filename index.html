@@ -37,6 +37,9 @@
 			<div id="food">
 			</div>
 
+			<div id="error">
+			</div>
+
 			<!-- <button type="button" name="read_more" value="read_more">
 				<font size="2">Read More</font>
 			</button> -->
@@ -93,6 +96,7 @@
 			    } else if (request.status != 200) {
 			      // on failued
 						console.log('failed');
+						$('#error').html('request failed' + '\n' + 'status code : ' + request.status);
 			    } else {
 						// on success
 			      var json = request.responseText;
