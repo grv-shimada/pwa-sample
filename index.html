@@ -64,7 +64,7 @@
         function(position) {
 					var latitude = position.coords.latitude;
 					var longitude = position.coords.longitude;
-					$('#geo_location').html('Latitude : ' + latitude + ' ' + 'Longitude : ' + longitude);
+					$('#geo_location').html('Latitude : ' + latitude + '<br/>' + 'Longitude : ' + longitude);
 					var radius = 600;
 					searchNear(latitude, longitude, radius);
         },
@@ -100,7 +100,7 @@
 			    } else if (request.status != 200) {
 			      // on failued
 						console.log('failed');
-						$('#error').html('request failed' + ' ' + 'status code : ' + request.status);
+						$('#error').html('request failed' + '<br/>' + 'status code : ' + request.status);
 			    } else {
 						// on success
 			      var json = request.responseText;
