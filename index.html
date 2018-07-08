@@ -16,6 +16,9 @@
 	  <meta name="msapplication-TileImage" content="icons/pwa-icon-256x256.png">
 	  <meta name="msapplication-TileColor" content="#2e7fa1">
 
+		<link rel="stylesheet" type="text/css" href="./css/common.css">
+		<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+
 		<script>
 		if ('serviceWorker' in navigator) {
 	    navigator.serviceWorker
@@ -26,10 +29,103 @@
 
 	</head>
 	<body>
-		<h5>PWA Service Worker Sample</h5>
-		<div>Since around 2005 web development technologies have shifted from static to dynamic documents driven by server (PHP, ASP.NET) and client side (e.g. Ajax[1]) tools, and responsive web design.[2] Despite an early push for web-based apps based on these technologies on devices such as the 2007 iPhone, attempts at web-apps failed by comparison to native-apps. Native apps provided a better user experience and booted faster compared to having to load in a browser at runtime. Packaged resources and direct access to hardware allowed native apps to perform much faster and to provide more features. By the mid 2010s, however, continued enhancements in HTML5, CSS3, and JavaScript, significantly more capable and standards compliant web browsers, along with powerful processors such as the A10 and Snapdragon 821 made performant hybrid-apps a viable alternative.
+		<div class="content">
+			<div class="title">
+				<h3>PWA Service Worker Sample</h3>
+			</div>
 
-Hybrid apps
-Hybrid apps mimic the native mobile UX, and need an App store download. As such they consume storage. The combination of markup, styling sheets, and scripts enable custom interactive page elements without the use of closed systems such as Flash. Partially running in a mobile browser, hybrids did not have a URL, supported a rich user interface and access to system capabilities. Newly released CSS3 and JavaScript frameworks allowed new design patterns such as the box model followed by grids and flex, accompanied by translations, transformations, animations.</div>
+			<div id="food">
+			</div>
+
+			<!-- <button type="button" name="read_more" value="read_more">
+				<font size="2">Read More</font>
+			</button> -->
+
+		</div>
+
+	<script>
+	if (!navigator.geolocation) {
+		alert("この端末では位置情報が取得できません");
+  } else {
+		searchPosition();
+	}
+
+	function searchPosition()
+	{
+      // get geo position
+      navigator.geolocation.getCurrentPosition(
+        // on success
+        function(position) {
+					var latitude = position.coords.latitude;
+					var longitude = position.coords.longitude;
+					var radius = 600;
+					searchNear(latitude, longitude, radius);
+        },
+        // on failed
+        function(error) {
+          switch(error.code) {
+            case 1:
+              alert("位置情報の利用が許可されていません");
+              break;
+            case 2:
+              alert("現在位置が取得できませんでした");
+              break;
+            case 3:
+              alert("タイムアウトになりました");
+              break;
+            default:
+              alert("その他のエラー(エラーコード:"+error.code+")");
+              break;
+          }
+        }
+      );
+    }
+
+		function searchNear(latitude, longitude, radius)
+		{
+			var url = createUrl(latitude, longitude, radius);
+			var request = new XMLHttpRequest();
+			request.open('GET', url);
+			request.onreadystatechange = function () {
+			    if (request.readyState != 4) {
+			      // on request
+						console.log('requesting...');
+			    } else if (request.status != 200) {
+			      // on failued
+						console.log('failed');
+			    } else {
+						// on success
+			      var json = request.responseText;
+						updateView(JSON.parse(json));
+			    }
+			};
+			request.send(null);
+		}
+
+		function createUrl(latitude, longitude, radius)
+		{
+			var url = 'http://bokonon.php.xdomain.jp/my_lunch/get_near_food.php'
+			+ '?'
+			+ 'latitude=' + latitude
+			+ '&'
+			+ 'longitude=' + longitude
+			+ '&'
+			+ 'radius=' + radius;
+			return url;
+		}
+
+		function updateView(jsonObject)
+		{
+			var results = jsonObject['results'];
+			console.log(results);
+			console.log(results.length);
+			for (var i = 0; i<results.length; i++) {
+				var name = results[i]['name'];
+				$('#food').append('<div>' + name + '</div>');
+			}
+		}
+
+	</script>
 	</body>
+
 </html>
