@@ -91,34 +91,43 @@
 		function searchNear(latitude, longitude, radius)
 		{
 			var url = createUrl(latitude, longitude, radius);
-			var request = new XMLHttpRequest();
-			request.open('GET', url);
-			request.onreadystatechange = function () {
-			    if (request.readyState != 4) {
-			      // on request
-						console.log('requesting...');
-			    } else if (request.status != 200) {
-			      // on failued
-						console.log('failed');
-						$('#error').html('request failed' + '<br/>' + 'status code : ' + request.status);
-			    } else {
-						// on success
-			      var json = request.responseText;
-						updateView(JSON.parse(json));
-			    }
-			};
-			request.send(null);
+			$.ajax({
+				url: url,
+				type: 'GET',
+				    crossDomain: true,
+				    dataType: 'jsonp',
+				})
+				.then(
+				function (data) {
+					console.log(data);
+				},
+				function (e) {
+					alert('failed!');
+					console.log(e);
+				});
+
 		}
 
 		function createUrl(latitude, longitude, radius)
 		{
-			var url = 'http://bokonon.php.xdomain.jp/my_lunch/get_near_food.php'
-			+ '?'
-			+ 'latitude=' + latitude
-			+ '&'
-			+ 'longitude=' + longitude
-			+ '&'
-			+ 'radius=' + radius;
+			var output = 'json';
+		  var types = 'food';
+		  var language = 'ja';
+		  var key = 'AIzaSyAQwpZ5GwHPn7DUyIjJx_2WfeYUbdaU-VU';
+
+		  var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/'
+		  + output
+		  + '?'
+		  + 'location=' + latitude + ',' + longitude
+		  + '&'
+		  + 'radius=' + radius
+		  + '&'
+		  + 'types=' + types
+		  + '&'
+		  + 'language=' + language
+		  + '&'
+		  + 'key=' + key;
+
 			return url;
 		}
 
