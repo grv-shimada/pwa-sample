@@ -37,16 +37,6 @@
 			<div id="geo_location">
 			</div>
 
-			<div id="food">
-			</div>
-
-			<div id="error">
-			</div>
-
-			<!-- <button type="button" name="read_more" value="read_more">
-				<font size="2">Read More</font>
-			</button> -->
-
 		</div>
 
 	<script>
@@ -65,8 +55,6 @@
 					var latitude = position.coords.latitude;
 					var longitude = position.coords.longitude;
 					$('#geo_location').html('Latitude : ' + latitude + '<br/>' + 'Longitude : ' + longitude);
-					var radius = 600;
-					searchNear(latitude, longitude, radius);
         },
         // on failed
         function(error) {
@@ -87,60 +75,6 @@
         }
       );
     }
-
-		function searchNear(latitude, longitude, radius)
-		{
-			var url = createUrl(latitude, longitude, radius);
-			$.ajax({
-				url: url,
-				type: 'GET',
-				    crossDomain: true,
-				    dataType: 'jsonp',
-				})
-				.then(
-				function (data) {
-					console.log(data);
-				},
-				function (e) {
-					alert('failed!');
-					console.log(e);
-				});
-
-		}
-
-		function createUrl(latitude, longitude, radius)
-		{
-			var output = 'json';
-		  var types = 'food';
-		  var language = 'ja';
-		  var key = 'AIzaSyAQwpZ5GwHPn7DUyIjJx_2WfeYUbdaU-VU';
-
-		  var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/'
-		  + output
-		  + '?'
-		  + 'location=' + latitude + ',' + longitude
-		  + '&'
-		  + 'radius=' + radius
-		  + '&'
-		  + 'types=' + types
-		  + '&'
-		  + 'language=' + language
-		  + '&'
-		  + 'key=' + key;
-
-			return url;
-		}
-
-		function updateView(jsonObject)
-		{
-			var results = jsonObject['results'];
-			console.log(results);
-			console.log(results.length);
-			for (var i = 0; i<results.length; i++) {
-				var name = results[i]['name'];
-				$('#food').append('<div>' + name + '</div>');
-			}
-		}
 
 	</script>
 	</body>
