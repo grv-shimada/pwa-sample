@@ -1,82 +1,43 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="Our PWA Test.">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>PWA Test Title</title>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Our PWA Test.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PWA Test Title</title>
 
-		<link rel="manifest" href="manifest.json">
-		<!-- Add to home screen for Safari on iOS -->
-	  <meta name="apple-mobile-web-app-capable" content="yes">
-	  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-	  <meta name="apple-mobile-web-app-title" content="PWA Sample Content">
-	  <link rel="apple-touch-icon" href="icons/pwa-icon-256x256.png">
-	  <meta name="msapplication-TileImage" content="icons/pwa-icon-256x256.png">
-	  <meta name="msapplication-TileColor" content="#2e7fa1">
+    <link rel="manifest" href="manifest.json">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PWA Sample Content">
+    <link rel="apple-touch-icon" href="icons/pwa-icon-256x256.png">
+    <meta name="msapplication-TileImage" content="icons/pwa-icon-256x256.png">
+    <meta name="msapplication-TileColor" content="#2e7fa1">
 
-		<link rel="stylesheet" type="text/css" href="./css/common.css">
-		<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
 
-		<script>
-		if ('serviceWorker' in navigator) {
-	    navigator.serviceWorker
-	             .register('service-worker.js')
-	             .then(function() { console.log('Service Worker Registered'); });
-	  }
-		</script>
-
-	</head>
-	<body>
-		<div class="content">
-			<div class="title">
-				<h3>PWA Service Worker Sample</h3>
-			</div>
-
-			<div id="geo_location">
-			</div>
-
-		</div>
-
-	<script>
-	if (!navigator.geolocation) {
-		alert('Location information can not be acquired on this device.');
-  } else {
-		searchPosition();
-	}
-
-	function searchPosition()
-	{
-      // get geo position
-      navigator.geolocation.getCurrentPosition(
-        // on success
-        function(position) {
-					var latitude = position.coords.latitude;
-					var longitude = position.coords.longitude;
-					$('#geo_location').html('Latitude : ' + latitude + '<br/>' + 'Longitude : ' + longitude);
-        },
-        // on failed
-        function(error) {
-          switch(error.code) {
-            case 1:
-              alert('Location permission denied.');
-              break;
-            case 2:
-              alert('The current position could not be acquired.');
-              break;
-            case 3:
-              alert('Timeout');
-              break;
-            default:
-              alert('Other error error code :' + error.code);
-              break;
-          }
-        }
-      );
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+      .register('service-worker.js')
+      .then(function() { console.log('Service Worker Registered'); });
     }
+    </script>
 
-	</script>
-	</body>
+  </head>
+  <body>
+    <div class="content">
+      <div class="title">
+        <h3>PWA Service Worker Sample</h3>
+      </div>
+      <div id="geo_location"></div>
+      <video id="video" autoplay playsinline></video>
+      <script src="./js/location.js"></script>
+      <script src="./js/camera.js"></script>
+    </div>
+  </body>
 
 </html>

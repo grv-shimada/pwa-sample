@@ -2,5 +2,9 @@
   width: 80%;
 }
 .content div {
-    margin: 0 auto;
+  margin: 0 auto;
+}
+#video {
+  display: block;
+  width: 300px;
 }
