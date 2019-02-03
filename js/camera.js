@@ -1,6 +1,10 @@
-const medias = {audio : false, video : {
+const medias = {audio: false, video: {
         width: 300,
-        facingMode: 'environment'
+        // facingMode: 'environment'
+        // facingMode: 'user'
+        advanced: [
+          { facingMode: 'environment' },
+        ]
       }},
       video  = document.getElementById('video');
 
