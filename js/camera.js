@@ -1,5 +1,5 @@
 const medias = {audio: false, video: {
-        width: 300,
+        // width: 300,
         // facingMode: 'environment'
         // facingMode: 'user'
         advanced: [
