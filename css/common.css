@@ -1,10 +1,10 @@
 .title {
-  width: 80%;
+
 }
 .content div {
+  width: 90%;
   margin: 0 auto;
 }
 #video {
-  display: block;
   width: 300px;
 }
